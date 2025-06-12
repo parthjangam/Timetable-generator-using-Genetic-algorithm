@@ -1,3 +1,4 @@
+cryptography --prefer-binary
 absl-py==2.2.2
 anyio==4.9.0
 arabic-reshaper==3.0.0
