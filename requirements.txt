@@ -1,4 +1,5 @@
-cryptography --prefer-binary
+pyo3 --only-binary=:all:
+maturin --only-binary=:all:
 absl-py==2.2.2
 anyio==4.9.0
 arabic-reshaper==3.0.0
