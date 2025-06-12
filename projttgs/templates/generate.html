@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}Generate Timetable{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Generate Timetable</h3>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        The system will generate a timetable using a genetic algorithm based on the data you've entered.
+                        This process may take a few moments depending on the complexity of your requirements.
+                    </div>
+                    
+                
+                    
+                    <h5 class="card-title">Constraints Applied:</h5>
+                    <ul class="list-group mb-4">
+                        <li class="list-group-item">
+                            <i class="fas fa-check-circle text-success mr-2"></i>
+                            A faculty cannot teach more than one subject in the same timeslot
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fas fa-check-circle text-success mr-2"></i>
+                            A room cannot be assigned to more than one group in the same timeslot
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fas fa-check-circle text-success mr-2"></i>
+                            A student group cannot have more than one subject scheduled in the same timeslot
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fas fa-check-circle text-success mr-2"></i>
+                            Weekly hours per subject for each group must be satisfied
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fas fa-check-circle text-success mr-2"></i>
+                            Room types must match subject types (e.g., labs must be assigned to laboratory rooms)
+                        </li>
+                    </ul>
+                    
+                    <form method="post" action="{% url 'timetable' %}">
+                        {% csrf_token %}
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-cogs mr-2"></i>Generate Timetable
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url 'addSections' %}" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left mr-2"></i>Back to Sections
+                        </a>
+                        <a href="{% url 'admindash' %}" class="btn btn-secondary">
+                            <i class="fas fa-home mr-2"></i>Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

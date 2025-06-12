@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Automatic T.T Generator | Timetable Generation System</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            background-color: #f9f9f9;
+            padding-top: 70px;
+        }
+        
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: var(--secondary-color) !important;
+            transition: all 0.3s;
+        }
+        
+        .navbar-brand {
+            font-family: 'Roboto Slab', serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: white !important;
+        }
+        
+        .navbar-brand span {
+            color: var(--primary-color);
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8) !important;
+            margin: 0 5px;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: white !important;
+            transform: translateY(-2px);
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        .nav-item.active .nav-link {
+            color: white !important;
+            font-weight: 600;
+        }
+        
+        .nav-item.active .nav-link:after {
+            width: 100%;
+        }
+        
+        /* Carousel Styling */
+        .carousel {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .carousel-item {
+            height: 600px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+        
+        .carousel-item img {
+            position: absolute;
+            object-fit: cover;
+            top: 0;
+            left: 0;
+            min-height: 600px;
+            opacity: 0.15;
+        }
+        
+        .carousel-caption {
+            bottom: 30%;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        
+        .carousel-caption h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        
+        .carousel-caption p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn-primary {
+            background-color: white;
+            color: var(--primary-color);
+            border: none;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            background-color: white;
+            color: var(--primary-color);
+        }
+        
+        .btn-outline-secondary {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transition: all 0.3s;
+        }
+        
+        .btn-outline-secondary:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* Jumbotron */
+        .jumbotron {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem auto;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid var(--primary-color);
+        }
+        
+        .jumbotron .lead {
+            font-size: 1.1rem;
+            color: #555;
+        }
+        
+        /* Features Section */
+        .welcome h1.display-4 {
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .welcome hr {
+            width: 100px;
+            height: 3px;
+            background-color: var(--primary-color);
+            margin: 1.5rem auto;
+            opacity: 1;
+        }
+        
+        .welcome p.lead {
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        .feature-box {
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s;
+        }
+        
+        .feature-box i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-box h3 {
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-box p {
+            color: #666;
+        }
+        
+        .feature-box:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Connect Section */
+        .social a {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin: 0 10px;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .social a:hover {
+            color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 2rem 0 1rem;
+        }
+        
+        footer h5 {
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        
+        footer p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 0.5rem;
+        }
+        
+        footer hr.light {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            width: 80%;
+            margin: 1rem auto;
+        }
+        
+        /* Animation classes */
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .carousel-item {
+                height: 500px;
+            }
+            
+            .carousel-caption {
+                bottom: 20%;
+            }
+            
+            .carousel-caption h1 {
+                font-size: 2rem;
+            }
+            
+            .carousel-caption p {
+                font-size: 1rem;
+            }
+            
+            .jumbotron .col-md-3 {
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><span>TT</span>GS</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'index' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'about' %}">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Sign Up</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Image Carousel -->
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="static/img/CarouselBG.png" />
+                <div class="container">
+                    <div class="carousel-caption text-left fade-in">
+                        <h1><b>Easy to Use.</b></h1>
+                        <p>A Simple and Easy to use Timetable Generation tool for Colleges and Universities. Click on the Help Button for Assistance in Generating the Timetable.</p>
+                        <p><a class="btn btn-lg btn-primary" href="{% url 'help' %}" role="button">Help</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="static/img/CarouselBG.png" />
+                <div class="container">
+                    <div class="carousel-caption fade-in">
+                        <h1><b>Efficient and Reliable.</b></h1>
+                        <p>An efficient and a reliable tool to generate and save your Timetable with collision avoidance. Learn more about Automatic T.T Generator.</p>
+                        <p><a class="btn btn-lg btn-primary" href="{% url 'about' %}" role="button">Learn more</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="static/img/CarouselBG.png" />
+                <div class="container">
+                    <div class="carousel-caption text-right fade-in">
+                        <h1><b>Simple and Non-Complex.</b></h1>
+                        <p>The Development Process is Simplified using a Clean and an Elegant User Interface with Minimal Complexities.</p>
+                        <p><a class="btn btn-lg btn-primary" href="{% url 'login' %}" role="button">Generate Timetable</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+    <!-- Jumbotron -->
+    <div class="container-fluid">
+        <div class="row jumbotron fade-in">
+            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-10">
+                <p class="lead">Welcome to Automatic T.T Generator, a timetable management system for colleges and universities to schedule their organization's timetable. Automatic T.T Generator started off as a company that formed strong relationships with schools, colleges and universities to help them generate their timetable with ease and maximum efficiency, saving the organization's valuable time.</p>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-2">
+                <a href="{% url 'about' %}"><button type="button" class="btn btn-outline-secondary btn-lg">About Us</button></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Build with Ease and Logos section -->
+    <div class="container-fluid padding">
+        <div class="row welcome text-center fade-in">
+            <div class="col-12">
+                <h1 class="display-4">Build with ease.</h1>
+            </div>
+            <hr />
+            <div class="col-12">
+                <p class="lead">
+                    A Timetable Generation Tool that allows the swift, efficient and smooth generation of college and university timetables with complete collision avoidance.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container-fluid">
+        <div class="row text-center padding">
+            <div class="col-xs-12 col-sm-6 col-md-4 feature-box fade-in">
+                <i class="fas fa-bolt"></i>
+                <h3>Fast</h3>
+                <p>Fast and Smooth Scheduling.</p>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 feature-box fade-in" style="animation-delay: 0.2s">
+                <i class="fas fa-lock"></i>
+                <h3>Secure</h3>
+                <p>Secure Scheduling Process.</p>
+            </div>
+            <div class="col-sm-12 col-md-4 feature-box fade-in" style="animation-delay: 0.4s">
+                <i class="fas fa-check-square"></i>
+                <h3>Reliable</h3>
+                <p>Reliable and Trustworthy Process.</p>
+            </div>
+        </div>
+        <hr class="my-4"/>
+    </div>
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container-fluid padding">
+            <div class="row text-center">
+                <div class="col-12">
+                    <h5>Automatic T.T Generator</h5>
+                    <p>The most efficient timetable generation system for educational institutions.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Add animation to elements
+        $(document).ready(function() {
+            // Animate carousel captions
+            $('.carousel').on('slide.bs.carousel', function () {
+                $('.carousel-caption').removeClass('fade-in');
+                setTimeout(function() {
+                    $('.carousel-item.active .carousel-caption').addClass('fade-in');
+                }, 50);
+            });
+            
+            // Initialize first caption
+            $('.carousel-item.active .carousel-caption').addClass('fade-in');
+            
+            // Navbar scroll effect
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 50) {
+                    $('.navbar').css('padding', '10px 0');
+                    $('.navbar').css('box-shadow', '0 2px 10px rgba(0, 0, 0, 0.2)');
+                } else {
+                    $('.navbar').css('padding', '20px 0');
+                    $('.navbar').css('box-shadow', '0 2px 10px rgba(0, 0, 0, 0.1)');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

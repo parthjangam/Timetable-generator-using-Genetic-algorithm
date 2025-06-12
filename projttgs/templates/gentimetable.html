@@ -1,0 +1,303 @@
+{% load static %}
+{% load custom_filters %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Automatic T.T Generator | Generated Timetable</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- PDF Generation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+    
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            background-color: #f9f9f9;
+            padding-top: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background-color: var(--light-color);
+            border-radius: 8px;
+        }
+        
+        .timetable-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .timetable {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .timetable th, .timetable td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        
+        .timetable th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .timetable tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .theory-class {
+            background-color: #d4edda;
+        }
+        
+        .lab-class {
+            background-color: #f8d7da;
+        }
+        
+        .btn-container {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .stats-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stats-title {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .department-title {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.5rem;
+            margin-top: 2rem;
+            border-radius: 4px;
+        }
+        
+        .year-title {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.3rem;
+            margin-top: 1rem;
+            border-radius: 4px;
+        }
+        
+        .division-title {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            padding: 0.2rem;
+            margin-top: 0.5rem;
+            border-radius: 4px;
+        }
+        
+        /* Timetable styles */
+        .timetable-container {
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .timetable-title {
+            background-color: #343a40;
+            color: white;
+            padding: 0.7rem;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .timetable-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .timetable-table th, .timetable-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        
+        .timetable-table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        .class-cell {
+            padding: 5px;
+            border-radius: 3px;
+        }
+        
+        .theory-class {
+            background-color: #e3f2fd;
+        }
+        
+        .lab-class {
+            background-color: #e8f5e9;
+        }
+        
+        .course-name {
+            font-weight: bold;
+            margin-bottom: 3px;
+        }
+        
+        .teacher-name {
+            font-style: italic;
+            font-size: 0.9em;
+            margin-bottom: 2px;
+        }
+        
+        .room-number {
+            font-size: 0.8em;
+            color: #666;
+        }
+        
+        .empty-cell {
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="pdf-content">
+        <div class="header">
+            <h1>Generated Timetable</h1>
+            <p class="lead">Automatically generated using Genetic Algorithm</p>
+        </div>
+        
+        
+        
+        {% if timetable %}
+            {% for dept_id, dept in timetable.items %}
+                <div class="department-title">
+                    <h3>{{ dept.name }}</h3>
+                </div>
+                
+                {% for year, year_data in dept.years.items %}
+                    <div class="year-title">
+                        <h4>Year: {{ year }}</h4>
+                    </div>
+                    
+                    {% for div_id, div in year_data.divisions.items %}
+                        <div class="division-title">
+                            <h5>Division: {{ div.name }}</h5>
+                        </div>
+                        
+                        <div class="timetable-container">
+                            <table class="timetable">
+                                <thead>
+                                    <tr>
+                                        <th>Time Slot</th>
+                                        {% for day in "Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday"|split %}
+                                            <th>{{ day }}</th>
+                                        {% endfor %}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for slot_num in "12345678"|make_list %}
+                                        <tr>
+                                            <td><strong>Slot {{ slot_num }}</strong></td>
+                                            {% for day in "Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday"|split %}
+                                                <td>
+                                                    {% if div.days|get_item:day and slot_num in div.days|get_item:day %}
+                                                        {% with class_data=div.days|get_item:day|get_item:slot_num %}
+                                                            <div class="{% if class_data.course_type == 'theory' %}theory-class{% else %}lab-class{% endif %}">
+                                                                <strong>{{ class_data.course }}</strong><br>
+                                                                {{ class_data.teacher }}<br>
+                                                                Room: {{ class_data.room }}
+                                                            </div>
+                                                        {% endwith %}
+                                                    {% else %}
+                                                        -
+                                                    {% endif %}
+                                                </td>
+                                            {% endfor %}
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            {% empty %}
+                <div class="alert alert-warning">
+                    No timetable data available. Please check your configuration.
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="alert alert-warning">
+                No timetable data available. Please check your configuration.
+            </div>
+        {% endif %}
+    </div>
+    
+    <div class="btn-container">
+        <button class="btn btn-primary" id="download-pdf">
+            <i class="fas fa-download mr-2"></i>Download PDF
+        </button>
+        <a href="{% url 'generate' %}" class="btn btn-secondary ml-2">
+            <i class="fas fa-sync-alt mr-2"></i>Generate New Timetable
+        </a>
+        <a href="{% url 'admindash' %}" class="btn btn-outline-primary ml-2">
+            <i class="fas fa-home mr-2"></i>Back to Dashboard
+        </a>
+    </div>
+    
+    <script>
+        document.getElementById('download-pdf').addEventListener('click', function() {
+            const element = document.getElementById('pdf-content');
+            const opt = {
+                margin: 1,
+                filename: 'timetable.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' }
+            };
+            
+            html2pdf().set(opt).from(element).save();
+        });
+    </script>
+    
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

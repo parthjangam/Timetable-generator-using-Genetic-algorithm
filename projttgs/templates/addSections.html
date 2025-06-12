@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Automatic T.T Generator | Add Sections</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            background-color: #f9f9f9;
+            padding-top: 70px;
+        }
+        
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: white !important;
+        }
+        
+        .navbar-brand {
+            font-family: 'Roboto Slab', serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--secondary-color) !important;
+        }
+        
+        .navbar-brand span {
+            color: var(--primary-color);
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            color: var(--secondary-color) !important;
+            margin: 0 5px;
+            transition: all 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+            transform: translateY(-2px);
+        }
+        
+        .nav-item.active .nav-link {
+            color: var(--primary-color) !important;
+            font-weight: 600;
+        }
+        
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dropdown-item {
+            transition: all 0.2s;
+        }
+        
+        .dropdown-item:hover {
+            background-color: var(--primary-color);
+            color: white !important;
+        }
+        
+        .form-container {
+            background: white;
+            border-radius: 10px;
+            padding: 2.5rem;
+            margin: 2rem auto;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            max-width: 800px;
+            border-top: 4px solid var(--primary-color);
+        }
+        
+        .form-title {
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .form-title:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--primary-color);
+        }
+        
+        .form-description {
+            text-align: center;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            font-weight: 500;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-control {
+            border-radius: 4px;
+            padding: 2px 15px;
+            border: 1px solid #ddd;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+            background-color: transparent;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            border-radius: 4px;
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            border-radius: 4px;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #1a252f;
+            border-color: #1a252f;
+        }
+        
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            border-radius: 4px;
+        }
+        
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .action-buttons .btn {
+            margin: 0.5rem 0;
+        }
+        
+        /* Animation classes */
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .action-buttons .btn {
+                width: 100%;
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-md navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><span>TT</span>GS</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'admindash' %}">Get Started</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'addDepts' %}">Departments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'addInstructors' %}">Teachers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'addCourses' %}">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'addTimings' %}">Timings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'addRooms' %}">Rooms</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'addSections' %}">Sections</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'generate' %}">Generate</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown">
+                            <i class="fas fa-user-circle mr-1"></i> {{ user.first_name }}
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="{% url 'password_change' %}">
+                                <i class="fas fa-key mr-2"></i>Change Password
+                            </a>
+                            <a class="dropdown-item" href="{% url 'logout' %}">
+                                <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container fade-in">
+        {% block content %}
+        {% load static %}
+        
+        <div class="form-container">
+            <h1 class="form-title">Add Sections</h1>
+            <p class="form-description">Please use the following form to enter the Sections into the system for timetable generation</p>
+            
+            <form method="POST" action="{% url 'addSections' %}" class="needs-validation" novalidate>
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="department">Department</label>
+                    <select class="form-control" id="department" name="department" required>
+                        <option value="" selected disabled>Select department</option>
+                        {% for dept in departments %}
+                        <option value="{{ dept.id }}">{{ dept.dept_name }} ({{ dept.dept_code }})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="year">Year</label>
+                    <select class="form-control" id="year" name="year" required disabled>
+                        <option value="" selected disabled>Select year</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="division">Division</label>
+                    <select class="form-control" id="division" name="division" required disabled>
+                        <option value="" selected disabled>Select division</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="course">Course</label>
+                    <select class="form-control" id="course" name="course" required>
+                        <option value="" selected disabled>Select course</option>
+                        {% for course in courses %}
+                        <option value="{{ course.id }}">{{ course.course_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="teacher">Teacher</label>
+                    <select class="form-control" id="teacher" name="teacher" required>
+                        <option value="" selected disabled>Select teacher</option>
+                        {% for teacher in teachers %}
+                        <option value="{{ teacher.id }}">{{ teacher.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <script>
+                    $(document).ready(function() {
+                        console.log('Document ready');  // Debug log
+                        
+                        $('#department').on('change', function() {
+                            const deptId = $(this).val();
+                            const yearSelect = $('#year');
+                            
+                            console.log('Department selected:', deptId);  // Debug log
+                            
+                            // Reset year dropdown
+                            yearSelect.empty().append('<option value="" selected disabled>Select year</option>');
+                            
+                            if (!deptId) {
+                                yearSelect.prop('disabled', true);
+                                return;
+                            }
+                            
+                            // Make AJAX call to get years for selected department
+                            console.log('Making AJAX call to get years for department:', deptId);  // Debug log
+                            $.ajax({
+                                url: '{% url "get_department_years" %}',
+                                data: {
+                                    'department_id': deptId
+                                },
+                                dataType: 'json',
+                                success: function(data) {
+                                    console.log('AJAX Response:', data);  // Debug log
+                                    console.log('Years received:', data.years);  // Debug log
+                                    
+                                    if (data.years && data.years.length > 0) {
+                                        console.log('Adding years to dropdown:', data.years);  // Debug log
+                                        data.years.forEach(function(year) {
+                                            yearSelect.append(
+                                                $('<option></option>')
+                                                    .val(year.year_number)  // Change to year_number
+                                                    .text(year.year_name)
+                                            );
+                                        });
+                                        yearSelect.prop('disabled', false);  // Enable the dropdown
+                                    } else {
+                                        console.log('No years found for department');  // Debug log
+                                        yearSelect.append('<option value="" disabled>No years configured</option>');
+                                        yearSelect.prop('disabled', true);
+                                    }
+                                },
+                                error: function(xhr, status, error) {
+                                    console.error('Error fetching years:', error);  // Debug log
+                                    console.error('Status:', status);  // Debug log
+                                    console.error('Response:', xhr.responseText);  // Debug log
+                                    yearSelect.append('<option value="" disabled>Error loading years</option>');
+                                    yearSelect.prop('disabled', true);
+                                }
+                                
+                            });
+                        });
+
+                        $('#year').on('change', function() {
+                        const deptId = $('#department').val();
+                        const yearNum = $(this).val();
+                        const divisionSelect = $('#division');
+                        divisionSelect.empty().append('<option value="" selected disabled>Select division</option>');
+
+                        if (!deptId || !yearNum) {
+                            divisionSelect.prop('disabled', true);
+                            return;
+                        }
+
+                        $.ajax({
+                            url: '{% url "get_divisions" %}',
+                            data: {
+                                'department_id': deptId,
+                                'year_number': yearNum
+                            },
+                            dataType: 'json',
+                            success: function(data) {
+                                if (data.divisions && data.divisions.length > 0) {
+                                    data.divisions.forEach(function(division) {
+                                        divisionSelect.append(
+                                            $('<option></option>')
+                                                .val(division.id)
+                                                .text(division.name)
+                                        );
+                                    });
+                                    divisionSelect.prop('disabled', false);
+                                } else {
+                                    divisionSelect.append('<option value="" disabled>No divisions found</option>');
+                                    divisionSelect.prop('disabled', true);
+                                }
+                            },
+                            error: function() {
+                                divisionSelect.append('<option value="" disabled>Error loading divisions</option>');
+                                divisionSelect.prop('disabled', true);
+                            }
+                        });
+                    });
+                });
+                </script>
+                
+                <div class="action-buttons">
+                    <div>
+                        
+                        <a href="{% url 'editsection' %}" class="btn btn-outline-primary mr-2">
+                            <i class="fas fa-list mr-2"></i>View Sections
+                        </a>
+                        <button type="submit" class="btn btn-primary mr-2">
+                            <i class="fas fa-plus-circle mr-2"></i>Add Section
+                        </button>
+                    </div>
+                    <div>
+                        
+                        <a href="{% url 'addRooms' %}" class="btn btn-secondary mr-2">
+                            <i class="fas fa-arrow-left mr-2"></i>Back to Rooms
+                        </a>
+                        <a href="{% url 'generate' %}" class="btn btn-primary ml-2">
+                            Generate<i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        {% endblock %}
+    </main>
+
+
+</body>
+</html>
+
+<script>
+function validateForm(form) {
+    const formData = new FormData(form);
+    console.log('Submitting form with data:');
+    for (let pair of formData.entries()) {
+        console.log(pair[0] + ':', pair[1]);
+    }
+    return true;
+}
+</script>

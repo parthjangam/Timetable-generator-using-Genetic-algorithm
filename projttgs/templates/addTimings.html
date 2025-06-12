@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Automatic T.T Generator | Add Timings</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            background-color: #f9f9f9;
+            padding-top: 70px;
+        }
+        
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: white !important;
+        }
+        
+        .navbar-brand {
+            font-family: 'Roboto Slab', serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--secondary-color) !important;
+        }
+        
+        .navbar-brand span {
+            color: var(--primary-color);
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            color: var(--secondary-color) !important;
+            margin: 0 5px;
+            transition: all 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+            transform: translateY(-2px);
+        }
+        
+        .nav-item.active .nav-link {
+            color: var(--primary-color) !important;
+            font-weight: 600;
+        }
+        
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dropdown-item {
+            transition: all 0.2s;
+        }
+        
+        .dropdown-item:hover {
+            background-color: var(--primary-color);
+            color: white !important;
+        }
+        
+        .form-container {
+            background: white;
+            border-radius: 10px;
+            padding: 2.5rem;
+            margin: 2rem auto;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            max-width: 800px;
+            border-top: 4px solid var(--primary-color);
+        }
+        
+        .form-title {
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .form-title:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--primary-color);
+        }
+        
+        .form-description {
+            text-align: center;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        
+        .form-group label {
+            font-weight: 500;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-control {
+            border-radius: 4px;
+            padding: 2px 15px;
+            border: 1px solid #ddd;
+            transition: all 0.3s;
+            margin-bottom: 1rem;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+        }
+        
+        .time-input-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .time-input-group .form-control {
+            margin-bottom: 0;
+            margin-right: 1rem;
+        }
+        
+        .time-separator {
+            margin: 0 0.5rem;
+            font-weight: bold;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+            background-color: transparent;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            border-radius: 4px;
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            border-radius: 4px;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #1a252f;
+            border-color: #1a252f;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .action-buttons .btn {
+            margin: 0.5rem 0;
+        }
+        
+        /* Animation classes */
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .action-buttons .btn {
+                width: 100%;
+            }
+            
+            .time-input-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .time-input-group .form-control {
+                margin-right: 0;
+                margin-bottom: 1rem;
+                width: 100%;
+            }
+            
+            .time-separator {
+                margin: 0.5rem 0;
+                align-self: center;
+            }
+        }
+    </style>
+
+<script>
+    $(document).ready(function() {
+        // Add animation to form elements
+        $('form input, form select, form textarea').each(function(index) {
+            $(this).addClass('fade-in');
+            $(this).css('animation-delay', (index * 0.1) + 's');
+        });
+
+        // Function to generate time slots based on day configuration
+        function generateTimeSlots() {
+            const numDays = parseInt($('#id_num_days').val());
+            const dayStart = $('#id_day_start').val();
+            const dayEnd = $('#id_day_end').val();
+            const periodDuration = $('#id_period_duration').val();
+            const numBreaks = parseInt($('#id_num_breaks').val());
+            const breakDuration = $('#id_break_duration').val();
+            
+            if (!dayStart || !dayEnd || !periodDuration) return;
+            
+            const $timeSlotsContainer = $('#time-slots-container');
+            $timeSlotsContainer.empty();
+            
+            const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+            
+            // Calculate time in minutes
+            function timeToMinutes(time) {
+                const [hours, minutes] = time.split(':').map(Number);
+                return hours * 60 + minutes;
+            }
+            
+            function minutesToTime(minutes) {
+                const hrs = Math.floor(minutes / 60);
+                const mins = minutes % 60;
+                return `${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}`;
+            }
+            
+            const startMinutes = timeToMinutes(dayStart);
+            const endMinutes = timeToMinutes(dayEnd);
+            const periodMins = parseInt(periodDuration);
+            const breakMins = parseInt(breakDuration);
+            
+            for (let day = 0; day < numDays; day++) {
+                const dayCard = $(`
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">${days[day]} Schedule</h5>
+                        </div>
+                        <div class="card-body day-schedule" id="day-${day}-schedule">
+                            <!-- Periods will be added here -->
+                        </div>
+                    </div>
+                `);
+                
+                $timeSlotsContainer.append(dayCard);
+                
+                const $daySchedule = $(`#day-${day}-schedule`);
+                let currentTime = startMinutes;
+                let periodCount = 1;
+                let breakCount = 1;
+                
+                while (currentTime + periodMins <= endMinutes) {
+                    const periodEnd = currentTime + periodMins;
+                    
+                    // Add period
+                    $daySchedule.append(`
+                        <div class="form-group time-slot-group">
+                            <label>Period ${periodCount}</label>
+                            <div class="time-input-group">
+                                <input type="time" class="form-control" 
+                                       name="day_${day}_period_${periodCount}_start" 
+                                       value="${minutesToTime(currentTime)}" required readonly>
+                                <span class="time-separator">to</span>
+                                <input type="time" class="form-control" 
+                                       name="day_${day}_period_${periodCount}_end" 
+                                       value="${minutesToTime(periodEnd)}" required readonly>
+                                <input type="hidden" name="day_${day}_period_${periodCount}_name" value="Period ${periodCount}">
+                            </div>
+                        </div>
+                    `);
+                    
+                    currentTime = periodEnd;
+                    periodCount++;
+                    
+                    // Add break if needed and if there's time remaining
+                    if (breakCount <= numBreaks && currentTime + breakMins <= endMinutes) {
+                        const breakEnd = currentTime + breakMins;
+                        
+                        $daySchedule.append(`
+                            <div class="form-group time-slot-group break-slot">
+                                <label>Break ${breakCount}</label>
+                                <div class="time-input-group">
+                                    <input type="time" class="form-control" 
+                                           name="day_${day}_break_${breakCount}_start" 
+                                           value="${minutesToTime(currentTime)}" required readonly>
+                                    <span class="time-separator">to</span>
+                                    <input type="time" class="form-control" 
+                                           name="day_${day}_break_${breakCount}_end" 
+                                           value="${minutesToTime(breakEnd)}" required readonly>
+                                    <input type="hidden" name="day_${day}_break_${breakCount}_name" value="Break ${breakCount}">
+                                </div>
+                            </div>
+                        `);
+                        
+                        currentTime = breakEnd;
+                        breakCount++;
+                    }
+                }
+            }
+        }
+
+        // Event listeners for form changes
+        $('#id_num_days, #id_day_start, #id_day_end, #id_period_duration, #id_num_breaks, #id_break_duration').on('change', function() {
+            generateTimeSlots();
+        });
+    });
+</script>
+
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-md navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><span>TT</span>GS</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'admindash' %}">Get Started</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'addDepts' %}">Departments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'addInstructors' %}">Teachers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'addCourses' %}">Courses</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'addTimings' %}">Timings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'addRooms' %}">Rooms</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'addSections' %}">Sections</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'generate' %}">Generate</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown">
+                            <i class="fas fa-user-circle mr-1"></i> {{ user.first_name }}
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="{% url 'password_change' %}">
+                                <i class="fas fa-key mr-2"></i>Change Password
+                            </a>
+                            <a class="dropdown-item" href="{% url 'logout' %}">
+                                <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container fade-in">
+        <div class="form-container">
+            <h1 class="form-title">Add Timings</h1>
+            <p class="form-description">Configure your institution's daily schedule</p>
+            
+            <form method="post">
+                {% csrf_token %}
+                
+                <!-- Basic Configuration -->
+                <div class="form-group">
+                    <label for="id_num_days">Number of Working Days</label>
+                    <select class="form-control" id="id_num_days" name="num_days" required>
+                        <option value="" selected disabled>Select days</option>
+                        <option value="1">1 Day</option>
+                        <option value="2">2 Days</option>
+                        <option value="3">3 Days</option>
+                        <option value="4">4 Days</option>
+                        <option value="5">5 Days</option>
+                        <option value="6">6 Days</option>
+                        <option value="7">7 Days</option>
+                    </select>
+                </div>
+
+                <div id="days-slots-container"></div>
+                
+                
+                <!-- Container for dynamically generated time slots -->
+                <div id="time-slots-container">
+                    <!-- Time slots will be generated here -->
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <div>
+                        <a href="{% url 'editmeetingtime' %}" class="btn btn-outline-primary mr-2">
+                            <i class="fas fa-list mr-2"></i>View Timings
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-plus-circle mr-2"></i>Save Timings
+                        </button>
+                    </div>
+                    <div class="mt-3 mt-md-0">
+                        <a href="{% url 'addCourses' %}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left mr-2"></i>Back to Courses
+                        </a>
+                        <a href="{% url 'addRooms' %}" class="btn btn-primary ml-2">
+                            <i class="fas fa-arrow-right mr-2"></i>Next: Rooms
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+    $(document).ready(function() {
+        // Days of the week
+        const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    
+        // When number of days changes, generate day/slot inputs
+        $('#id_num_days').on('change', function() {
+            const numDays = parseInt($(this).val());
+            const $container = $('#days-slots-container');
+            $container.empty();
+    
+            if (!numDays || numDays < 1 || numDays > 7) return;
+    
+            for (let i = 0; i < numDays; i++) {
+                let dayHtml = `
+                    <div class="card mb-3">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">${daysOfWeek[i]}</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="day${i}_total_slots">Number of Slots for ${daysOfWeek[i]}</label>
+                                <select class="form-control total-slots" id="day${i}_total_slots" name="day${i}_total_slots" required>
+                                    <option value="" selected disabled>Select number of slots</option>
+                                    <option value="1">1 Slot</option>
+                                    <option value="2">2 Slots</option>
+                                    <option value="3">3 Slots</option>
+                                    <option value="4">4 Slots</option>
+                                    <option value="5">5 Slots</option>
+                                    <option value="6">6 Slots</option>
+                                    <option value="7">7 Slots</option>
+                                    <option value="8">8 Slots</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                $container.append(dayHtml);
+            }
+        });
+    });
+    </script>
+</body>
+</html>

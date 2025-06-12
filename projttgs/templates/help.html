@@ -1,0 +1,191 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Automatic T.T Generator | Help Guide</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            background-color: #f9f9f9;
+            padding-top: 20px;
+            padding-bottom: 40px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header h1 {
+            font-family: 'Roboto Slab', serif;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-container {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .step-container:hover {
+            transform: translateY(-5px);
+        }
+
+        .step-number {
+            background-color: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .step-title {
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .step-title i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+
+        .step-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin: 2rem auto;
+            background-color: var(--primary-color);
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+        }
+        
+        .back-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>How to Use Timetable Generator</h1>
+            <p>Follow these 7 simple steps to generate your timetable</p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="step-container">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title"><i class="fas fa-building"></i> Add Department</h3>
+                    <p class="step-description">Start by adding your department details. This includes the department name and other details.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="step-container">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title"><i class="fas fa-chalkboard-teacher"></i> Add Teachers</h3>
+                    <p class="step-description">Add all teachers in your department. Include their names, ID according to the institution's rules and regulations.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="step-container">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title"><i class="fas fa-book"></i> Add Courses</h3>
+                    <p class="step-description">Input all courses that need to be scheduled. Include course codes, names, weekly slots, course type etc accordingly.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="step-container">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title"><i class="fas fa-clock"></i> Add Timings</h3>
+                    <p class="step-description">Define the available time slots for classes. Set up your daily schedule according to slots per day.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="step-container">
+                    <div class="step-number">5</div>
+                    <h3 class="step-title"><i class="fas fa-door-open"></i> Add Rooms</h3>
+                    <p class="step-description">Add all available classrooms and their capacities. Include type of room for specific rooms.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="step-container">
+                    <div class="step-number">6</div>
+                    <h3 class="step-title"><i class="fas fa-users"></i> Add Sections</h3>
+                    <p class="step-description">Create sections for each course. Where you need to assign teachers, subjects, years etc according to the institution.</p>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="step-container">
+                    <div class="step-number">7</div>
+                    <h3 class="step-title"><i class="fas fa-magic"></i> Generate Timetable</h3>
+                    <p class="step-description">Click the generate button to create your optimized timetable. The system will automatically assign teachers, rooms, and time slots while considering all constraints.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <a href="/" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
+    </div>
+</body>
+</html>
